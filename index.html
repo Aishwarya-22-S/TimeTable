@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Timetable Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="board">
+    <div class="board__header">
+      <span class="board__eyebrow">Class Departures &middot; All Platforms</span>
+      <h1 class="board__title">Smart Timetable Generator</h1>
+    </div>
+
+    <form class="panel" onsubmit="return false;">
+      <div class="panel__field">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="DATA STRUCTURES">
+      </div>
+
+      <div class="panel__field">
+        <label for="day">Day</label>
+        <select id="day">
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+          <option>Saturday</option>
+        </select>
+      </div>
+
+      <div class="panel__field">
+        <label for="startTime">Time</label>
+        <select id="startTime"></select>
+      </div>
+
+      <div class="panel__field">
+        <label for="room">Room</label>
+        <input type="text" id="room" placeholder="LAB 2">
+      </div>
+
+      <button type="button" class="board-btn" onclick="addSlot()">Board&nbsp;Class</button>
+    </form>
+
+    <div class="grid-wrap">
+      <table id="timetable"></table>
+    </div>
+
+    <p class="board__footnote">&#9642; Tap [X] to cancel a boarding. Double-booked slots are refused &mdash; one class per platform.</p>
+  </div>
+
+  <script src="timetable_backend.js"></script>
+</body>
+</html>

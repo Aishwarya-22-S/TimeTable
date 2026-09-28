@@ -1,0 +1,268 @@
+/* style.css — "Departure Board" theme for Smart Timetable Generator */
+
+:root {
+  --board-bg: #12171A;
+  --panel: #1B2225;
+  --panel-line: #2B3538;
+  --amber: #FFB300;
+  --amber-dim: #6B4E10;
+  --amber-glow: rgba(255, 179, 0, 0.35);
+  --danger: #FF5A4E;
+  --text-soft: #8FA0A6;
+
+  --font-display: 'Oswald', sans-serif;
+  --font-led: 'Share Tech Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--board-bg);
+  background-image:
+    repeating-linear-gradient(180deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+  color: var(--amber);
+  font-family: var(--font-led);
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+.board {
+  width: 100%;
+  max-width: 880px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 6px;
+  box-shadow: 0 0 0 6px #0B0F11, 0 20px 50px rgba(0,0,0,0.5);
+  padding: 32px 36px 30px 36px;
+}
+
+/* ---------- Header ---------- */
+
+.board__eyebrow {
+  display: block;
+  font-family: var(--font-led);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.board__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 34px;
+  margin: 0 0 26px 0;
+  color: var(--amber);
+  text-shadow: 0 0 12px var(--amber-glow);
+  animation: flicker 4s infinite;
+}
+
+@keyframes flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97% { opacity: 0.85; }
+  98% { opacity: 1; }
+}
+
+/* ---------- Control panel / form ---------- */
+
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 18px 22px;
+  padding: 18px;
+  margin-bottom: 24px;
+  background: #10151A;
+  border: 1px solid var(--panel-line);
+  border-radius: 4px;
+}
+
+.panel__field {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  flex: 1 1 140px;
+}
+
+.panel__field label {
+  font-family: var(--font-led);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+.panel__field input,
+.panel__field select {
+  background: #0C1013;
+  border: 1px solid var(--amber-dim);
+  border-radius: 3px;
+  padding: 9px 10px;
+  font-family: var(--font-led);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--amber);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.panel__field input::placeholder {
+  color: var(--amber-dim);
+  text-transform: uppercase;
+}
+
+.panel__field input:focus,
+.panel__field select:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-glow);
+}
+
+.board-btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #10151A;
+  background: var(--amber);
+  border: none;
+  border-radius: 3px;
+  padding: 11px 22px;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.08s ease;
+  white-space: nowrap;
+}
+
+.board-btn:hover {
+  background: #FFC94D;
+}
+
+.board-btn:active {
+  transform: scale(0.96);
+}
+
+/* ---------- Timetable grid ---------- */
+
+.grid-wrap {
+  overflow-x: auto;
+}
+
+table#timetable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#timetable th,
+#timetable td {
+  border: 1px solid var(--panel-line);
+  padding: 8px;
+  vertical-align: top;
+  text-align: center;
+}
+
+#timetable th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #10151A;
+  background: var(--amber);
+  padding: 9px 6px;
+}
+
+#timetable td:first-child,
+#timetable th:first-child {
+  font-family: var(--font-led);
+  font-size: 13px;
+  color: var(--text-soft);
+  background: #10151A;
+  white-space: nowrap;
+}
+
+/* each scheduled class = a lit split-flap tile */
+.slot-entry {
+  position: relative;
+  background: var(--amber);
+  color: #10151A;
+  border-radius: 2px;
+  padding: 6px 20px 6px 8px;
+  margin: 4px auto;
+  font-family: var(--font-led);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+  max-width: 150px;
+  box-shadow: 0 0 8px var(--amber-glow);
+}
+
+.slot-entry .slot-room {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  background: var(--danger);
+  color: #10151A;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-led);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #FF7A70;
+}
+
+/* ---------- Footnote ---------- */
+
+.board__footnote {
+  font-family: var(--font-led);
+  font-size: 11.5px;
+  color: var(--text-soft);
+  margin: 20px 0 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 600px) {
+  .board {
+    padding: 24px 18px 22px 18px;
+  }
+  .board__title {
+    font-size: 24px;
+  }
+  .panel {
+    gap: 14px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .board__title {
+    animation: none;
+  }
+}
